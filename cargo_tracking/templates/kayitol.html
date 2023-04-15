@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div id="navbar-container"></div>
+    <main>
+        <div class="container mt-5 text-center">
+            <h3>Kayıt olmak için formu doldurunuz</h3>
+          </div>
+          <form>
+            <div class="container">
+              <div class="row g-3 justify-content-center">
+                <div class="col-md-3">
+                  <label for="inputEmail4" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="inputEmail4" placeholder="name@example.com">
+                </div>
+                <div class="col-md-3">
+                  <label for="inputPassword4" class="form-label">Şifre</label>
+                  <input type="password" class="form-control" id="inputPassword4">
+                </div>
+              </div>
+              <div class="row g-3 justify-content-center">
+                <div class="col-md-3">
+                  <label for="inputName" class="form-label">Adınız</label>
+                  <input type="text" class="form-control" aria-label="First name">
+                </div>
+                <div class="col-md-3">
+                  <label for="inputName2" class="form-label">Soyadınız</label>
+                  <input type="text" class="form-control" aria-label="Last name">
+                </div>
+              </div>
+              <div class="row g-3 justify-content-center">
+                <div class="col-md-3">
+                  <label for="inputTelephone" class="form-label">Telefon</label>
+                  <input type="text" class="form-control" aria-label="First name" placeholder="533...">
+                </div> 
+                <div class="col-md-3">
+                  <label for="inputDate" class="form-label">Doğum Tarihi</label>
+                  <input type="text" class="form-control" aria-label="First name" placeholder="gg.aa.yyyy">
+                </div> 
+                <div class="mb-1"></div>
+              </div>
+              <div class="row g-3 justify-content-start">
+                <div class="col-md-3" style="margin-left: 328px;" >
+                  <button type="submit" class="btn btn-primary">KAYIT OL</button>
+                </div>  
+              </div>
+            </div>
+          </form>          
+    </main>
+      
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script>
+        fetch("{% url 'navbar' %}")
+          .then(response => response.text())
+          .then(data => {
+            document.querySelector('#navbar-container').innerHTML = data;
+          });
+      </script>
+</body>
+</html>
