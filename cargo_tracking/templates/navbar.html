@@ -37,12 +37,20 @@
         <li class="nav-item">
           <a id="hakkimizda-btn" class="nav-link" href="{% url 'hakkimizda' %}">Hakkımızda</a>
         </li>
+        
+        {% if user.is_authenticated %}
         <li class="nav-item">
-          <a id="girisyap-btn" class="nav-link" href="{% url 'girisyap' %}">Giriş Yap</a>
+          <a id="kayitol-btn"  class="nav-link" href="{% url 'logout' %}">Çıkış Yap</a>
         </li>
+        {% else %}
         <li class="nav-item">
           <a id="kayitol-btn"  class="nav-link" href="{% url 'kayitol' %}">Kayıt Ol</a>
         </li>
+        <li class="nav-item">
+          <a id="girisyap-btn" class="nav-link" href="{% url 'girisyap' %}">Giriş Yap</a>
+        </li>
+        {% endif %}
+        
       </ul>
     </div>
   </div>

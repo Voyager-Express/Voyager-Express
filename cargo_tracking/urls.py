@@ -15,5 +15,6 @@ urlpatterns = [
     path("navbar", views.navbar, name="navbar"),
     path("tamamlanmis", views.tamamlanmis, name="tamamlanmis"),
     path("yenigonderim", views.yenigonderim, name="yenigonderim"),
+    path("logout/", views.logout_view, name='logout')
     
 ]

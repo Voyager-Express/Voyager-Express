@@ -11,29 +11,31 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 
 </head>
+
 <body>
     <div id="navbar-container"></div>
     <main>
       <div class="container mt-5">
-        <form>
+        <form action="girisyap", method="POST">
+          {% csrf_token %}
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name@example.com">
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name@example.com">
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Şifre</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
             <div class="mb-3">
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                <input class="form-check-input" type="radio" name="options" id="inlineRadio1" value="userT">
                 <label class="form-check-label" for="inlineRadio1">Müşteri</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                <input class="form-check-input" type="radio" name="options" id="inlineRadio2" value="courierT">
                 <label class="form-check-labe3" for="inlineRadio3">Kurye</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                <input class="form-check-input" type="radio" name="options" id="inlineRadio3" value="adminT">
                 <label class="form-check-labe4" for="inlineRadio4">Admin</label>
               </div>
             </div>

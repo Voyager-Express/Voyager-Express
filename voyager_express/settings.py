@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'voyager_express.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'voyagerexpressdb',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'USER': 'root',
+        'PASSWORD': 'PassToor123',
     }
 }
 
@@ -122,3 +126,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+######################
+
+AUTHENTICATION_BACKENDS = (
+        'cargo_tracking.email_auth.EmailBackend',
+        'django.contrib.auth.backends.ModelBackend',
+    )
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+######################
