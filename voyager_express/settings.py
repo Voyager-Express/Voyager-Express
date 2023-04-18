@@ -129,10 +129,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ######################
 
-AUTHENTICATION_BACKENDS = (
-        'cargo_tracking.email_auth.EmailBackend',
-        'django.contrib.auth.backends.ModelBackend',
-    )
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+AUTH_USER_MODEL = "cargo_tracking.User"
+
+# AUTHENTICATION_BACKENDS = [
+#         'cargo_tracking.email_auth.EmailBackend',
+#         'django.contrib.auth.backends.ModelBackend',
+# ]
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 ######################
