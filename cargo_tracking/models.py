@@ -5,10 +5,11 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 
 class CustomAccountManager(BaseUserManager):
 
-    def create_superuser(self, email, user_name, first_name, password, **other_fields):
+    def create_superuser(self, email, password, **other_fields):
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
         other_fields.setdefault('is_active', True)
+        other_fields.setdefault("role", "BASEADMIN")
 
         if other_fields.get('is_staff') is not True:
             raise ValueError(
@@ -17,14 +18,13 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError(
                 'Superuser must be assigned to is_superuser=True')
     
-        return self.create_user(email, user_name, first_name, password, **other_fields)
+        return self.create_user(email, password, **other_fields)
 
-    def create_user(self, email, user_name, first_name, password, **other_fields):
+    def create_user(self, email, password, **other_fields):
         if not email:
             raise ValueError(_('Email Adresi Boş Olamaz'))
         email = self.normalize_email(email)
-        user = self.model(email=email, user_name=user_name,
-                          first_name=first_name, **other_fields)
+        user = self.model(email=email, **other_fields)
         user.set_password(password)
         user.save()
         return user
@@ -37,14 +37,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     start_date = models.DateTimeField(default=timezone.now)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    phone = models.CharField(max_length=11, blank=True, unique=True)
+    phone = models.CharField(max_length=11, blank=True, unique=True, null=True)
     address = models.CharField(max_length=250, blank=True)
-    rol = models.CharField(max_length=15)
+    role = models.CharField(max_length=15)
 
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['user_name' , 'first_name']
+    # REQUIRED_FIELDS = ['user_name']
 
     def __str__(self):
         return self.user_name

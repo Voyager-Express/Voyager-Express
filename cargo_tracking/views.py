@@ -21,19 +21,17 @@ def girisyap(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                if radioValue == "adminT" and request.user.rol == "ADMIN":
+                if radioValue == "adminT" and request.user.role == "ADMIN":
                     return redirect("adminpaneli")
 
-                elif radioValue == "courierT" and request.user.rol == "COURIER":
-                    print("staff")
+                elif radioValue == "courierT" and request.user.role == "COURIER":
                     return redirect("kuryepaneli")
 
-                elif radioValue == "userT" and not request.user.is_staff and not request.user.rol == "CUSTOMER":
-                    print("user")
+                elif radioValue == "userT" and request.user.role == "CUSTOMER":
                     return redirect("kullanicipaneli")
 
         else:
-           return redirect("girisyap")
+           return render(request, "girisyap")
 
     return render(request, "girisyap.html")
 
@@ -41,36 +39,36 @@ def girisyap(request):
 ## Admin Views
 
 @login_required
-@user_passes_test(lambda u: u.rol == "ADMIN")
+@user_passes_test(lambda u: u.role == "ADMIN")
 def adminpaneli(request):
     is_admin_panel = request.resolver_match.url_name == 'adminpaneli'
 
     return render(request, "adminpaneli.html")
 
 @login_required
-@user_passes_test(lambda u: u.rol == "ADMIN")
+@user_passes_test(lambda u: u.role == "ADMIN")
 def yenigonderim(request):
     return render(request, "yenigonderim.html")
 
 @login_required
-@user_passes_test(lambda u: u.rol == "ADMIN")
+@user_passes_test(lambda u: u.role == "ADMIN")
 def gonderiyonet(request):
     return render(request, "gonderiyonet.html")
 
 @login_required
-@user_passes_test(lambda u: u.rol == "ADMIN")
+@user_passes_test(lambda u: u.role == "ADMIN")
 def tamamlanmis(request):
     return render(request, "tamamlanmis.html")
 
 @login_required
-@user_passes_test(lambda u: u.rol == "ADMIN")
+@user_passes_test(lambda u: u.role == "ADMIN")
 def kuryetakip(request):
     return render(request, "kuryetakip.html")
 ##
 
 ## Courier Views
 
-@user_passes_test(lambda u: u.rol == "COURIER")
+@user_passes_test(lambda u: u.role == "COURIER")
 @login_required
 def kuryepaneli(request):
     return render(request, "kuryepaneli.html")
@@ -79,7 +77,7 @@ def kuryepaneli(request):
 ## User Views
 
 @login_required
-@user_passes_test(lambda u: u.rol == 'CUSTOMER')
+@user_passes_test(lambda u: u.role == 'CUSTOMER')
 def kullanicipaneli(request):
     return render(request, "kullanicipaneli.html")
 ##
@@ -93,6 +91,7 @@ def hakkimizda(request):
 
 @user_passes_test(lambda u: not u.is_authenticated)
 def kayitol(request):
+    ## in progress ...    
     return render(request, "kayitol.html")
 
 def logout_view(request):
@@ -102,6 +101,6 @@ def logout_view(request):
     response['Pragma'] = 'no-cache'
     response['Expires'] = '0'
     return response
-
+        
 def navbar(request):
     return render(request, "navbar.html")

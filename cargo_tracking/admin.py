@@ -11,13 +11,13 @@ class UserAdminConfig(UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'user_name', 'first_name')}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
-        ('Personal', {'fields': ('address', 'phone', 'rol')})
+        ('Personal', {'fields': ('address', 'phone', 'role')})
     )
 
     add_fieldsets = (
         (None, {
         'classes': ("wide",),
-        'fields': ('email', 'user_name', 'first_name', 'last_name', 'password1', 'password2', 'address', 'phone', 'rol',)}
+        'fields': ('email', 'user_name', 'first_name', 'last_name', 'password1', 'password2', 'address', 'phone', 'role',)}
         ),
     )
 
