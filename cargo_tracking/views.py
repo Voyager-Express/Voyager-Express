@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
-from . import models
+from .models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -32,8 +32,35 @@ def girisyap(request):
 
         else:
            return render(request, "girisyap")
-
     return render(request, "girisyap.html")
+
+@user_passes_test(lambda u: not u.is_authenticated)
+def kayitol(request):
+    if (request.method == 'POST'):
+        email = request.POST.get("emailR")
+        phone = request.POST.get("phoeR")
+        name= request.POST.get("nameR")
+        lastname = request.POST.get("lastnameR")
+        password1 = request.POST.get('password1R')
+        password2 = request.POST.get("password2R")
+        username = request.POST.get("usernameR")
+        if (password1 == password2):
+            if (User.objects.filter(email=email).exists()):
+                messages.error(request, "Email mevcut")
+                return redirect("kayitol")
+            elif(User.objects.filter(user_name=username).exists()):
+                messages.error(request, "Kullanıcı adı mevcut")
+                return redirect("kayitol")
+            else:
+                user = User.objects.create_user(email=email,  password=password1, phone=phone, user_name=username, first_name=name, last_name=lastname, role="CUSTOMER")    
+                user.save()
+                # messages.success(request, "Hesabınız başarılı bir şekilde oluşturuldu")
+                return redirect("girisyap")
+        elif(password1 != password2):
+            messages.error(request, "Şifre tekrarı hatalı")
+            return redirect("kayitol")
+
+    return render(request, "kayitol.html")
 
 
 ## Admin Views
@@ -88,11 +115,6 @@ def hesapayarlari(request):
 
 def hakkimizda(request):
     return render(request, "hakkimizda.html")
-
-@user_passes_test(lambda u: not u.is_authenticated)
-def kayitol(request):
-    ## in progress ...    
-    return render(request, "kayitol.html")
 
 def logout_view(request):
     logout(request)
