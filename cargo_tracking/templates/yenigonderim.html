@@ -14,7 +14,19 @@
 <body>
     <div id="navbar-container"></div>
     <main>
-        <div class="col-md-3" style="margin-left: 15px; margin-top: 10px;">
+        <div class="dropdown float-end" style="margin-right: 20px;">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                      Hesabım
+                      <img src="{% static 'img/gear.svg' %}" height="25" width="25" class="ms-2">
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li><a class="dropdown-item" href="{% url 'adminpaneli' %}">Admin Paneli</a></li>
+                      <li><a class="dropdown-item" href="{% url 'hesapayarlari' %}">Hesap Ayarları</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="{% url 'anasayfa' %}">Çıkış</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-md-3" style="margin-left: 20px;">
             <a href="{% url 'adminpaneli' %}" class="btn btn-primary btn-lg">Admin Paneli</a>
         </div>
         <div class="container mt-5 text-center">

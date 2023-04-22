@@ -126,3 +126,6 @@ def logout_view(request):
         
 def navbar(request):
     return render(request, "navbar.html")
+
+def kargohareketleri(request):
+    return render(request, "kargohareketleri.html")

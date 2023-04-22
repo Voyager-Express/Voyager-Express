@@ -19,6 +19,7 @@ urlpatterns = [
     path("hesapayarlari", views.hesapayarlari, name="hesapayarlari"),
     path("girisyap", views.girisyap, name="girisyap"),
     path("logout", views.logout_view, name='logout'),
+    path("kargohareketleri", views.kargohareketleri, name='kargohareketleri'),
     ## ##
     
 ]
