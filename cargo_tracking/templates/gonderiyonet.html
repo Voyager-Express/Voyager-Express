@@ -45,39 +45,19 @@
             </tr>
           </thead>
           <tbody>
+            {% for cargo in CargoList %}
             <tr>
-              <th scope="row">15655</th>
-              <td>adres23153fdghtryt</td>
-              <td>adres23153fdgdfgfdgfdggfghgfdgfdg13516</td>
-              <td>İstanbul</td>
-              <td>1515</td>
-              <td><input type="radio" name="radio1"></td>
-              <td><input type="radio" name="radio1"></td>
-              <td><input type="radio" name="radio1"></td>
-              <td><input type="radio" name="radio1"></td>
+              <th scope="row">{{ cargo.id }}</th>
+              <td>{{ cargo.reciever_first_name }} {{ cargo.reciever_last_name }}</td>
+              <td>{{ cargo.reciever_address }}</td>
+              <td>{{ cargo.reciever_city }}</td>
+              <td>{{ cargo.courier_id}}</td>
+              <td><input type="radio" {% if cargo.stage == 0 %} checked {% endif %} name="options" value="stage1"></td>
+              <td><input type="radio" {% if cargo.stage == 1 %} checked {% endif %} name="options" value="stage2"></td>
+              <td><input type="radio" {% if cargo.stage == 2 %} checked {% endif %} name="options" value="stage3"></td>
+              <td><input type="radio" {% if cargo.stage == 3 %} checked {% endif %} name="options" value="stage4"></td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>adres23153fdghtryt</td>
-              <td>Consectetur adipidsfdsfdscing elit</td>
-              <td>İstanbul</td>
-              <td>1515</td>
-              <td><input type="radio" name="radio2"></td>
-              <td><input type="radio" name="radio2"></td>
-              <td><input type="radio" name="radio2"></td>
-              <td><input type="radio" name="radio2"></td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>adres23153fdghtryt</td>
-              <td>Sed do eiusmdsfdsfdsfdsfod tempor incididunt</td>
-              <td>İstanbul</td>
-              <td>1515</td>
-              <td><input type="radio" name="radio3"></td>
-              <td><input type="radio" name="radio3"></td>
-              <td><input type="radio" name="radio3"></td>
-              <td><input type="radio" name="radio3"></td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
         <div class="d-flex justify-content-center mt-3">

@@ -33,46 +33,51 @@
             <h3>Yeni Gönderim</h3>
             <div class="row justify-content-center">
             <div class="col-md-8">
-            <form class="text-center">
+            <form class="text-center" method="POST">
+                {% csrf_token %}
                 <div class="input-group mt-3">
                     <span class="input-group-text w-25" id="basic-addon1">Gönderici Adı / Telefon</span>
-                    <input type="text" class="form-control" aria-label="gönderici" aria-describedby="basic-addon1">
-                    <input type="text" class="form-control" aria-label="gönderici" aria-describedby="basic-addon1" placeholder="533...">
+                    <input type="text" name="sender_nameF" class="form-control" aria-label="gönderici" aria-describedby="basic-addon1">
+                    <input type="text" name="sender_phoneF" class="form-control" aria-label="gönderici" aria-describedby="basic-addon1" placeholder="533...">
                 </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text w-25" id="basic-addon1">Kargo Adı</span>
-                    <input type="text" class="form-control" aria-label="kargoadi" aria-describedby="basic-addon1">
+                    <input name="cargo_nameF" type="text" class="form-control" aria-label="kargoadi" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text w-25" id="basic-addon1">Gönderici Adresi</span>
-                    <input type="text" class="form-control" aria-label="göndericiadres" aria-describedby="basic-addon1" placeholder="Mahalle, cadde/sokak, numara -İLÇE">
+                    <input type="text" name="sender_addressF" class="form-control" aria-label="göndericiadres" aria-describedby="basic-addon1" placeholder="Mahalle, cadde/sokak, numara -İLÇE">
                     </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text w-25" id="basic-addon1">İl</span>
-                    <select id="inputCity" class="form-select">
+                    <select id="inputCity" name="cbCitySenderF" class="form-select">
                             <option selected>Seç</option>
-                            <option>...</option>
+                            {% for city in CityList %}
+                            <option>{{ city.city_name }}</option>
+                            {% endfor %}
                         </select>
                 </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text w-25" id="basic-addon1">Alıcı Adı / Telefon</span>
-                    <input type="text" class="form-control" aria-label="alici" aria-describedby="basic-addon1">
-                    <input type="text" class="form-control" aria-label="telefon" aria-describedby="basic-addon1" placeholder="533...">
+                    <input type="text" name="reciever_nameF" class="form-control" aria-label="alici" aria-describedby="basic-addon1">
+                    <input type="text" name="reciever_phoneF" class="form-control" aria-label="telefon" aria-describedby="basic-addon1" placeholder="533...">
                 </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text w-25" id="basic-addon1">Alıcı Adresi</span>
-                    <input type="text" class="form-control" aria-label="aliciadres" aria-describedby="basic-addon1" placeholder="Mahalle, cadde/sokak, numara -İLÇE">
+                    <input type="text" name="reciever_addressF" class="form-control" aria-label="aliciadres" aria-describedby="basic-addon1" placeholder="Mahalle, cadde/sokak, numara -İLÇE">
                 </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text w-25" id="basic-addon1">İl</span>
-                        <select id="inputCity" class="form-select">
+                        <select id="inputCity" name="cbCityRecieverF" class="form-select">
                             <option selected>Seç</option>
-                            <option>...</option>
+                            {% for city in CityList %}
+                            <option>{{ city.city_name }}</option>
+                            {% endfor %}
                         </select>
                 </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text w-25" id="basic-addon1">Gönderi Türü</span>
-                        <select id="tür" class="form-select">
+                        <select id="tür" name="cbTypeF" class="form-select">
                             <option selected>Seç</option>
                             <option>BELGE</option>
                             <option>1-10 Kg</option>
@@ -82,7 +87,7 @@
                 </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text w-25" id="basic-addon1">Kargo Özelliği</span>
-                        <select id="ozellik" class="form-select">
+                        <select id="ozellik" name="cbFeatureF" class="form-select">
                             <option selected>Seç</option>
                             <option>STANDART</option>
                             <option>KIRILABİLİR</option>
@@ -93,9 +98,10 @@
                 </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text w-25" id="basic-addon1">Veriliş Tarihi</span>
-                    <input type="text" class="form-control" aria-label="verilistarihi" aria-describedby="basic-addon1" placeholder="gg.aa.yyyy">
+                    <!-- <input type="text" class="form-control" aria-label="verilistarihi" aria-describedby="basic-addon1" placeholder="gg.aa.yyyy"> -->
+                    <label for="date" class="form-control">{{ currentDate }}</label>
                     <span class="input-group-text w-25" id="basic-addon1">Teslim Süresi</span>
-                        <select id="inputDate" class="form-select">
+                        <select id="inputDate" name="cbDeliveryTimeF" class="form-select">
                             <option selected>Seç</option>
                             <option>Aynı Gün</option>
                             <option>1-3 iş günü</option>

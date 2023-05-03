@@ -40,33 +40,17 @@
             </tr>
           </thead>
           <tbody>
+            {% for cargo in CargoList %}
             <tr>
-              <th scope="row">15655</th>
-              <td>adres23153fd</td>
-              <td>dgffdgfffdgfddg dghfdgfdfhgfhfgfdgfdgf</td>
-              <td>İstanbul</td>
-              <td><input type="radio" name="radio1"></td>
-              <td><input type="radio" name="radio1"></td>
-              <td><input type="radio" name="radio1"></td>
+              <th scope="row">{{ cargo.id }}</th>
+              <td>{{ cargo.reciever_first_name }} {{ cargo.reciever_last_name }}</td>
+              <td>{{ cargo.reciever_address }}</td>
+              <td>{{ cargo.reciever_city }}</td>
+              <td><input type="radio" name="options" value="stage1"></td>
+              <td><input type="radio" name="options" value="stage2"></td>
+              <td><input type="radio" name="options" value="stage3"></td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Consecdfsdf dfg</td>
-              <td>dgffdgfdg dfgfdgfhgfgdgfdgfgfgdg</td>
-              <td>İstanbul</td>
-              <td><input type="radio" name="radio2"></td>
-              <td><input type="radio" name="radio2"></td>
-              <td><input type="radio" name="radio2"></td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Sed do fdgfgf</td>
-              <td>dgffdgfdg dfgfdgfdgfgdgf</td>
-              <td>İstanbul</td>
-              <td><input type="radio" name="radio3"></td>
-              <td><input type="radio" name="radio3"></td>
-              <td><input type="radio" name="radio3"></td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
         <div class="d-flex justify-content-center mt-3">

@@ -9,6 +9,7 @@ urlpatterns = [
     path("adminpaneli/gonderiyonet", views.gonderiyonet, name="gonderiyonet"),
     path("adminpaneli/kuryetakip", views.kuryetakip, name="kuryetakip"),
     path("adminpaneli/tamamlanmis", views.tamamlanmis, name="tamamlanmis"),
+    path("adminpaneli/updateCourier", views.updateCourier, name="kuryeGuncelle"),
     ## ##
     path("kullanicipaneli", views.kullanicipaneli, name="kullanicipaneli"),
     path("kuryepaneli", views.kuryepaneli, name="kuryepaneli"),

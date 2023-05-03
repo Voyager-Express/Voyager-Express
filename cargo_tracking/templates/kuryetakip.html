@@ -38,31 +38,29 @@
               <th scope="col">İl</th>
               <th scope="col">Kargo Limiti</th>
               <th scope="col">Aktif Kargo</th>
+              <th scope="col"></th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">15655</th>
-              <td>kurye1</td>
-              <td>İstanbul</td>
-              <td>50</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>kurye 2</td>
-              <td>İstanbul</td>
-              <td>1515</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>kurye 3</td>
-              <td>İstanbul</td>
-              <td>1515</td>
-              <td>5</td>
-            </tr>
-          </tbody>
+            {% for data in CourierList %}
+            <form method="POST" action="{% url 'kuryeGuncelle' %}">
+              {% csrf_token %}
+              <tr>
+                <td scope="row" name="courier_idF" >{{ data.courier_id }}</td>
+                <td>{{ data.courier_name }}</td>
+                <td>
+                  <select id="tür" name="city_nameF" class="form-select">
+                      <option selected>{{ data.city }}</option>
+                      {% for city in CityList %}                      
+                      <option>{{ city.city_name }}</option>
+                      {% endfor %}
+                  </select>
+                </td>
+                <td><input type="text" name="cargo_limitF" value="{{ data.cargo_limit }}"></td>
+                <td>{{ data.active_cargo_count }}</td>
+                <td><button type="submit" class="btn btn-primary" >Tamam</button></td>
+              </tr>
+            </form>
+            {% endfor %}
         </table>
       </div>
     </main>

@@ -9,7 +9,7 @@ class UserAdminConfig(UserAdmin):
     list_display = ('email', 'user_name', 'first_name', 'is_active', 'is_staff')
 
     fieldsets = (
-        (None, {'fields': ('email', 'user_name', 'first_name')}),
+        (None, {'fields': ('email', 'user_name', 'first_name', 'last_name')}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
         ('Personal', {'fields': ('address', 'phone', 'role')})
     )
@@ -20,5 +20,7 @@ class UserAdminConfig(UserAdmin):
         'fields': ('email', 'user_name', 'first_name', 'last_name', 'password1', 'password2', 'address', 'phone', 'role',)}
         ),
     )
+
+
 
 admin.site.register(User, UserAdminConfig)
