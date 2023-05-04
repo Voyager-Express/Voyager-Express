@@ -10,9 +10,18 @@ urlpatterns = [
     path("adminpaneli/kuryetakip", views.kuryetakip, name="kuryetakip"),
     path("adminpaneli/tamamlanmis", views.tamamlanmis, name="tamamlanmis"),
     path("adminpaneli/updateCourier", views.updateCourier, name="kuryeGuncelle"),
+    path("adminpaneli/gonderiyonet/updateCargoStage", views.updateCargoStageAdmin, name="updateCargoStageAdmin"),
+    path("adminpaneli/kuryepaneli/updateCargoStage", views.updateCargoStageCourier, name="updateCargoStageCourier"),
     ## ##
-    path("kullanicipaneli", views.kullanicipaneli, name="kullanicipaneli"),
+
+    ## Kurye ##
     path("kuryepaneli", views.kuryepaneli, name="kuryepaneli"),
+    ## ##
+
+    ## Kullanici ##
+    path("kullanicipaneli", views.kullanicipaneli, name="kullanicipaneli"),
+    ## ##
+
     ## Genel ##
     path("hakkimizda/", views.hakkimizda, name="hakkimizda"),
     path("kayitol", views.kayitol, name="kayitol"),

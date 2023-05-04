@@ -45,7 +45,10 @@
             <form method="POST" action="{% url 'kuryeGuncelle' %}">
               {% csrf_token %}
               <tr>
-                <td scope="row" name="courier_idF" >{{ data.courier_id }}</td>
+                <th scope="row" >
+                  <label for="form-label">{{ data.courier_id }}</label>
+                  <input type="hidden" name="courier_idF" value="{{ data.courier_id }}">
+                </td>
                 <td>{{ data.courier_name }}</td>
                 <td>
                   <select id="tür" name="city_nameF" class="form-select">

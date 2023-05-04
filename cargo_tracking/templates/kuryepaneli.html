@@ -37,19 +37,29 @@
               <th scope="col">Transfer Sürecinde</th>
               <th scope="col">Dağıtıma Çıktı</th>
               <th scope="col">Teslim Edildi</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             {% for cargo in CargoList %}
+            {% if cargo.stage != 3 and cargo.courier_id == CourierID%}
             <tr>
-              <th scope="row">{{ cargo.id }}</th>
+              <form method="POST" action="{% url 'updateCargoStageCourier' %}">
+                {% csrf_token %}
+              <th scope="row">
+                <label class="form-label">{{ cargo.id }}</label>
+                <input type="hidden" name="cargo_idF" value="{{ cargo.id }}">
+              </th> 
               <td>{{ cargo.reciever_first_name }} {{ cargo.reciever_last_name }}</td>
               <td>{{ cargo.reciever_address }}</td>
               <td>{{ cargo.reciever_city }}</td>
-              <td><input type="radio" name="options" value="stage1"></td>
-              <td><input type="radio" name="options" value="stage2"></td>
-              <td><input type="radio" name="options" value="stage3"></td>
+                <td><input type="radio" {% if cargo.stage == 1 %} checked {% endif %} name="options" value="stage1"></td>
+                <td><input type="radio" {% if cargo.stage == 2 %} checked {% endif %} name="options" value="stage2"></td>
+                <td><input type="radio" {% if cargo.stage == 3 %} checked {% endif %} name="options" value="stage3"></td>
+                <td><button type="submit" class="btn btn-primary" >Tamam</button></td>
+              </form>
             </tr>
+            {% endif %}
             {% endfor %}
           </tbody>
         </table>

@@ -113,30 +113,30 @@ def yenigonderim(request):
         for i in courierI:
             if (i.city == reciever_city_value and i.active_cargo_count <= i.cargo_limit):
                 courier_id_value = i.courier_id
+                i.active_cargo_count += 1
                 break
-
-        
-        
-
-        new_instance = Cargo(cargo_name = cargo_name_value,
-                            sender_first_name = sender_first_name_value,
-                            sender_last_name = sender_last_name,
-                            sender_address = sender_address_value,
-                            sender_city = sender_city_value,
-                            sender_phone = sender_phone_value,
-                            reciever_first_name = reciever_first_name_value,
-                            reciever_last_name = reciever_last_name_value,
-                            reciever_address = reciever_address_value,
-                            reciever_city = reciever_city_value,
-                            reciever_phone = reciever_phone_value,
-                            cargo_type = cargo_type_value,
-                            cargo_feature = cargo_feature_value,
-                            cargo_edt = cargo_edt_value,
-                            delivery_date = delivery_date_value,
-                            courier_id = courier_id_value,
-                            stage = 0)
-        new_instance.save()
-        return redirect("adminpaneli")
+        try:
+            new_instance = Cargo(cargo_name = cargo_name_value,
+                                sender_first_name = sender_first_name_value,
+                                sender_last_name = sender_last_name,
+                                sender_address = sender_address_value,
+                                sender_city = sender_city_value,
+                                sender_phone = sender_phone_value,
+                                reciever_first_name = reciever_first_name_value,
+                                reciever_last_name = reciever_last_name_value,
+                                reciever_address = reciever_address_value,
+                                reciever_city = reciever_city_value,
+                                reciever_phone = reciever_phone_value,
+                                cargo_type = cargo_type_value,
+                                cargo_feature = cargo_feature_value,
+                                cargo_edt = cargo_edt_value,
+                                delivery_date = delivery_date_value,
+                                courier_id = courier_id_value,
+                                stage = 0)
+            new_instance.save()
+            return redirect("adminpaneli")
+        except:
+            return redirect("yenigonderim")
 
     return render(request, "yenigonderim.html", {
         "currentDate" : timeNow,
@@ -170,14 +170,13 @@ def kuryetakip(request):
 @login_required
 @user_passes_test(lambda u: u.role == "ADMIN")
 def updateCourier(request):
-    print("asdfasdfasdfasdfasdfasdfassdfasdf")
     if (request.method == "POST"):
         courier_id_value = request.POST.get("courier_idF")
         city_value = request.POST.get("city_nameF")
         cargo_limit_value = request.POST.get("cargo_limitF")
         active_cargo_value = request.POST.get("active_cargoF")
 
-        courier = Courier.objects.get(pk=3)   
+        courier = Courier.objects.get(pk=courier_id_value)   
         # courier(cargo_limit = cargo_limit_value, city = city_value)
         try:
             courier.cargo_limit = int(cargo_limit_value)
@@ -188,10 +187,30 @@ def updateCourier(request):
         return redirect("kuryetakip")
     return redirect("kuryetakip")
     
+@login_required
+@user_passes_test(lambda u: u.role == "ADMIN")
+def updateCargoStageAdmin(request):
+    if (request.method == "POST"):
+        cargoID = request.POST.get("cargo_idF")
+        radio_value = request.POST.get("options")
+        
+        cargo = Cargo.objects.get(pk=cargoID)
 
+        if (radio_value == "stage0"):
+            cargo.stage = 0
+        elif (radio_value == "stage1"):
+            cargo.stage = 1
+        elif (radio_value == "stage2"):
+            cargo.stage = 2
+        elif (radio_value == "stage3"):
+            cargo.stage = 3
+        cargo.save()
+        return redirect("gonderiyonet")
 
+    return redirect("gonderiyonet")
+            
 
-##
+## End of Admin Views
 
 ## Courier Views
 
@@ -201,17 +220,38 @@ def kuryepaneli(request):
     cargoList = Cargo.objects.all()
 
     return render(request, "kuryepaneli.html", {
-        "CargoList" : cargoList
+        "CargoList" : cargoList,
+        "CourierID" : request.user.id
     })
-##
+
+@login_required
+@user_passes_test(lambda u: u.role == "COURIER")
+def updateCargoStageCourier(request):
+    if (request.method == "POST"):
+        cargoID = request.POST.get("cargo_idF")
+        radio_value = request.POST.get("options")
+        
+        cargo = Cargo.objects.get(pk=cargoID)
+        
+        if (radio_value == "stage1"):
+            cargo.stage = 1
+        elif (radio_value == "stage2"):
+            cargo.stage = 2
+        elif (radio_value == "stage3"):
+            cargo.stage = 3
+        cargo.save()
+        return redirect("kuryepaneli")
+
+    return redirect("kuryepaneli")
+## End of Courier Views
 
 ## User Views
 
 @login_required
 @user_passes_test(lambda u: u.role == 'CUSTOMER')
-def kullanicipaneli(request):
+def kullanicipaneli(request):    
     return render(request, "kullanicipaneli.html")
-##
+## End of User Views
 
 @login_required
 def hesapayarlari(request):
