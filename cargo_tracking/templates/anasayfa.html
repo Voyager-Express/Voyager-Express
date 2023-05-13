@@ -7,8 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voyager Express</title>
+    <link rel="icon" type="favicon" sizes="32x32" href="{% static 'img/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+      body {
+           background-image: url("{% static 'img/planet3.png' %}");
+           background-repeat: no-repeat;
+           background-size: cover;
+           background-position: center 90px;
+           background-attachment: fixed;
+       }
+
+   </style>
 </head>
 <body>
     <div id="navbar-container"></div>
@@ -21,7 +32,7 @@
                   <input type="takipno" class="form-control" id="takipnogiriniz" placeholder="Takip Numarası Giriniz">
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <button type="submit" class="btn btn-primary" id="girisYap">Giriş</button>
+                  <button type="submit" class="btn" id="girisYap" style="background-color: #3e9159; color: white; font-weight: bold;">Sorgula</button> 
                 </div>
               </form>
             </div>

@@ -32,4 +32,8 @@ urlpatterns = [
     path("kargohareketleri", views.kargohareketleri, name='kargohareketleri'),
     ## ##
     
+
+
+
+    path("kargodetay", views.kargodetay, name='kargodetay'),
 ]

@@ -187,8 +187,8 @@ def updateCourier(request):
         return redirect("kuryetakip")
     return redirect("kuryetakip")
     
-@login_required
-@user_passes_test(lambda u: u.role == "ADMIN")
+
+
 def updateCargoStageAdmin(request):
     if (request.method == "POST"):
         cargoID = request.POST.get("cargo_idF")
@@ -273,3 +273,6 @@ def navbar(request):
 
 def kargohareketleri(request):
     return render(request, "kargohareketleri.html")
+
+def kargodetay(request):
+    return render(request, "kargodetay.html")

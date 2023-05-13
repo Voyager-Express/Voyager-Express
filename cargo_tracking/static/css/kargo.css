@@ -1,0 +1,81 @@
+/* Adımların genel stili */
+.step {
+    position: relative;
+    text-align: center;
+    padding-top: 20px;
+  }
+  .step img {
+    width: 50%;
+    margin: auto;
+    display: block;
+  }
+  .step p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  
+  /* Adım işaretleri arasındaki çizgi stili */
+  .step::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -35%;
+    margin-top: -1px;
+    width: 60%;
+    border-top: 5px dotted #ddd;
+    z-index: -1;
+  }
+  
+  
+  /* Aktif adım işareti */
+  .step.active::before {
+    border-color: #3e9159;
+  }
+  
+  /* Aktif adım metni */
+  .step.active p {
+    color: #3e9159;
+    font-weight: bold;
+  }
+  
+  /* Gönderi alındı adımı */
+  .step-received img {
+    filter: grayscale(100%);
+  }
+  .step-received.active img {
+    filter: none;
+  }
+  
+  /* Transfer sürecinde adımı */
+  .step-transfer img {
+    filter: grayscale(100%);
+  }
+  .step-transfer.active img {
+    filter: none;
+  }
+  
+  /* Dağıtıma çıktı adımı */
+  .step-delivery img {
+    filter: grayscale(100%);
+  }
+  .step-delivery.active img {
+    filter: none;
+  }
+  
+  /* Teslim edildi adımı */
+  .step-delivered img {
+    filter: grayscale(100%);
+  }
+  .step-delivered.active img {
+    filter: none;
+  }
+  /* Teslim edildi adımının çizgisini kaldır */
+  .step-delivered::before {
+    display: none;
+  }
+  /* aktif durum rengi */
+  .step.active img {
+    filter: invert(10%) sepia(100%) saturate(3779%) hue-rotate(101deg) brightness(114%) contrast(60%);
+  }

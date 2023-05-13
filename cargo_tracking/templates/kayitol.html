@@ -7,8 +7,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kayıt Ol</title>
+    <link rel="icon" type="favicon" sizes="32x32" href="{% static 'img/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+      body {
+          background-image: url("{% static 'img/planet3.png' %}");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center 90px;
+          background-attachment: fixed;
+      }
+
+  .container, h1, p {
+      font-weight: bold;
+}
+  </style>
 </head>
 <body>
     <div id="navbar-container"></div>
@@ -67,7 +81,7 @@
             </div>
               <div class="row g-3 justify-content-start">
                 <div class="col-md-3" style="margin-left: 285px;" >
-                  <button type="submit" class="btn btn-primary">KAYIT OL</button>
+                  <button type="submit" class="btn" style="background-color: #3e9159; color: white; font-weight: bold;">KAYIT OL</button>
                 </div>  
               </div>
             </div>

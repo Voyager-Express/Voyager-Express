@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yeni Gönderim</title>
+    <link rel="icon" type="favicon" sizes="32x32" href="{% static 'img/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 
@@ -15,7 +16,7 @@
     <div id="navbar-container"></div>
     <main>
         <div class="dropdown float-end" style="margin-right: 20px;">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #3e9159; color: white; font-weight: bold;">
                       Hesabım
                       <img src="{% static 'img/gear.svg' %}" height="25" width="25" class="ms-2">
                     </button>
@@ -27,7 +28,7 @@
                     </ul>
                   </div>
                   <div class="col-md-3" style="margin-left: 20px;">
-            <a href="{% url 'adminpaneli' %}" class="btn btn-primary btn-lg">Admin Paneli</a>
+                    <a href="{% url 'adminpaneli' %}" class="btn btn-lg" style="background-color: #3e9159; color: white; font-weight: bold;">Admin Paneli</a>
         </div>
         <div class="container mt-5 text-center">
             <h3>Yeni Gönderim</h3>
@@ -109,7 +110,7 @@
                         </select>
                 </div>
                 <div class="d-flex justify-content-center mt-3">
-                    <button type="submit" class="btn btn-primary">KAYDET</button>
+                    <button type="submit" class="btn" style="background-color: #3e9159; color: white; font-weight: bold;">KAYDET</button>
                 </div>
 
             </form>
