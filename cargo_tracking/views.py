@@ -47,7 +47,7 @@ def girisyap(request):
 def kayitol(request):
     if (request.method == 'POST'):
         email = request.POST.get("emailR")
-        phone = request.POST.get("phoeR")
+        phone = request.POST.get("phoneR")
         name= request.POST.get("nameR")
         lastname = request.POST.get("lastnameR")
         password1 = request.POST.get('password1R')
@@ -250,7 +250,13 @@ def updateCargoStageCourier(request):
 @login_required
 @user_passes_test(lambda u: u.role == 'CUSTOMER')
 def kullanicipaneli(request):    
-    return render(request, "kullanicipaneli.html")
+    cargoList = Cargo.objects.all()
+    currUser = User.objects.get(pk=request.user.id)
+
+    return render(request, "kullanicipaneli.html", {
+        "CargoList" : cargoList,
+        "CurrUser" : currUser,
+    })
 ## End of User Views
 
 @login_required
@@ -272,7 +278,12 @@ def navbar(request):
     return render(request, "navbar.html")
 
 def kargohareketleri(request):
-    return render(request, "kargohareketleri.html")
+    currCargoId = request.POST.get('cargo_id')
+    print(currCargoId)
+    cargo = Cargo.objects.get(pk=currCargoId)
+    return render(request, "kargohareketleri.html", {
+        "CurrentCargo" : cargo
+    })
 
 def kargodetay(request):
     return render(request, "kargodetay.html")
