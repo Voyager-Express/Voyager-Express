@@ -12,6 +12,7 @@ urlpatterns = [
     path("adminpaneli/updateCourier", views.updateCourier, name="kuryeGuncelle"),
     path("adminpaneli/gonderiyonet/updateCargoStage", views.updateCargoStageAdmin, name="updateCargoStageAdmin"),
     path("adminpaneli/kuryepaneli/updateCargoStage", views.updateCargoStageCourier, name="updateCargoStageCourier"),
+    path("kargodetay", views.kargodetay, name='kargodetay'),
     ## ##
 
     ## Kurye ##
@@ -35,5 +36,5 @@ urlpatterns = [
 
 
 
-    path("kargodetay", views.kargodetay, name='kargodetay'),
+    
 ]

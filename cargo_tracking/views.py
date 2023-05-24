@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.decorators.cache import never_cache
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import datetime
+from django.shortcuts import get_object_or_404
 
 
 def anasayfa(request):
@@ -155,7 +156,12 @@ def gonderiyonet(request):
 @login_required
 @user_passes_test(lambda u: u.role == "ADMIN")
 def tamamlanmis(request):
-    return render(request, "tamamlanmis.html")
+    cargoList = Cargo.objects.all()
+    courierList = Courier.objects.all()
+    return render(request, "tamamlanmis.html", {
+        "CargoList" : cargoList,
+        "CourierList" : courierList,
+    })
 
 @login_required
 @user_passes_test(lambda u: u.role == "ADMIN")
@@ -275,15 +281,27 @@ def logout_view(request):
     return response
         
 def navbar(request):
-    return render(request, "navbar.html")
+    userRole = None
+    if request.user.is_authenticated:
+        userRole = request.user.role
+    print(userRole)
+    return render(request, "navbar.html", {
+        "UserRole" : userRole
+    })
 
 def kargohareketleri(request):
     currCargoId = request.POST.get('cargo_id')
     print(currCargoId)
-    cargo = Cargo.objects.get(pk=currCargoId)
+    # cargo = Cargo.objects.get(pk=currCargoId)
+    cargo = get_object_or_404(Cargo, pk=currCargoId)
     return render(request, "kargohareketleri.html", {
         "CurrentCargo" : cargo
     })
 
 def kargodetay(request):
-    return render(request, "kargodetay.html")
+    cargoId = request.POST.get("cargo_idF")
+    cargo = get_object_or_404(Cargo, pk=cargoId)
+    print(cargoId)
+    return render(request, "kargodetay.html", {
+        "ActiveCargo" : cargo
+    })

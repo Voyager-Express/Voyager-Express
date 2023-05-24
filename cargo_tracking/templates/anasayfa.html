@@ -27,11 +27,13 @@
         <div class="container mt-5">
           <div class="row justify-content-center align-items-center" style="height:50vh;">
             <div class="col-12 col-md-6 mb-3">
-              <form>
+              <form method="POST", action="{% url 'kargohareketleri' %}">
+                {% csrf_token %}
                 <div class="mb-3">
-                  <input type="takipno" class="form-control" id="takipnogiriniz" placeholder="Takip Numarası Giriniz">
+                  <input type="takipno" class="form-control" name="cargo_id" id="takipnogiriniz" placeholder="Takip Numarası Giriniz">
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
                   <button type="submit" class="btn" id="girisYap" style="background-color: #3e9159; color: white; font-weight: bold;">Sorgula</button> 
                 </div>
               </form>

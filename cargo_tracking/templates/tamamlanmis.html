@@ -2,88 +2,97 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tamamlanmış Kargolar</title>
-    <link rel="icon" type="favicon" sizes="32x32" href="{% static 'img/favicon.png' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamamlanmış Kargolar</title>
+  <link rel="icon" type="favicon" sizes="32x32" href="{% static 'img/favicon.png' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 
 </head>
+
 <body>
-    <div id="navbar-container"></div>
-    <main>
-      <div class="dropdown float-end" style="margin-right: 20px;">
-        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #3e9159; color: white; font-weight: bold;">
-                Hesabım
-                <img src="{% static 'img/gear.svg' %}" height="25" width="25" class="ms-2">
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="{% url 'adminpaneli' %}">Admin Paneli</a></li>
-                <li><a class="dropdown-item" href="{% url 'hesapayarlari' %}">Hesap Ayarları</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{% url 'anasayfa' %}">Çıkış</a></li>
-              </ul>
-            </div>
-            <div class="col-md-3" style="margin-left: 20px;">
-              <a href="{% url 'adminpaneli' %}" class="btn btn-lg" style="background-color: #3e9159; color: white; font-weight: bold;">Admin Paneli</a>
-      </div>
-      <div class="container mt-5 text-center">
-        <h3>Tamamlanmış Kargolar</h3>
-        <table class="table table-bordered table-dark table-hover rounded">
-          <thead>
+  <div id="navbar-container"></div>
+  <main>
+    <div class="dropdown float-end" style="margin-right: 20px;">
+      <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+        aria-expanded="false" style="background-color: #3e9159; color: white; font-weight: bold;">
+        Hesabım
+        <img src="{% static 'img/gear.svg' %}" height="25" width="25" class="ms-2">
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" href="{% url 'adminpaneli' %}">Admin Paneli</a></li>
+        <li><a class="dropdown-item" href="{% url 'hesapayarlari' %}">Hesap Ayarları</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" href="{% url 'anasayfa' %}">Çıkış</a></li>
+      </ul>
+    </div>
+    <div class="col-md-3" style="margin-left: 20px;">
+      <a href="{% url 'adminpaneli' %}" class="btn btn-lg"
+        style="background-color: #3e9159; color: white; font-weight: bold;">Admin Paneli</a>
+    </div>
+    <div class="container mt-5 text-center">
+      <h3>Tamamlanmış Kargolar</h3>
+      <table class="table table-bordered table-dark table-hover rounded">
+        <thead>
+          <tr>
+            <th scope="col">Kargo İd</th>
+            <th scope="col">Alıcı Adı</th>
+            <th scope="col">Adres</th>
+            <th scope="col">İl</th>
+            <th scope="col">Kurye İd</th>
+            <th scope="col">Kurye Adı</th>
+            <th scope="col">Detay</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cargo in CargoList %}
+          {% if cargo.stage == 3 %}
+          <form method="POST" action="{% url 'kargodetay' %}">
+            {% csrf_token %}
             <tr>
-              <th scope="col">Kargo İd</th>
-              <th scope="col">Alıcı Adı</th>
-              <th scope="col">Adres</th>
-              <th scope="col">İl</th>
-              <th scope="col">Kurye İd</th>
-              <th scope="col">Kurye Adı</th>
-              <th scope="col">Detay</th>
+              <th scope="row">
+                <label class="form-label">{{ cargo.id }}</label>
+                <input type="hidden" name="cargo_idF" value="{{ cargo.id }}">
+              </th>
+              <td>{{ cargo.reciever_first_name }} {{ cargo.reciever_last_name }}</td>
+              <td>{{ cargo.reciever_address }}</td>
+              <td>{{ cargo.reciever_city }}</td>
+              <td>{{ cargo.courier_id }}</td>
+              <td>
+                {% for courier in CourierList %}
+                {% if courier.courier_id == cargo.courier_id %}
+                {{ courier.courier_name }}
+                {% endif %}
+                {% endfor %}
+              </td>
+              <td>
+                <button type="submit" class="btn btn-sm" data-toggle="modal" data-target="#detayModal1"
+                  style="background-color: #3e9159; color: white; font-weight: bold;">Detay</button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">15655</th>
-              <td>adghfh23153fdgd</td>
-              <td>adres23153fdgdfgfdgfdggfghgfdgfdg13516</td>
-              <td>İstanbul</td>
-              <td>1515</td>
-              <td>Ali Talha</td>
-              <td><a href="{% url 'kargodetay' %}"><button type="button" class="btn btn-sm" data-toggle="modal" data-target="#detayModal1" style="background-color: #3e9159; color: white; font-weight: bold;">Detay</button></a></td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>adghfh23153fdgd</td>
-              <td>Consectetur adipidsfdsfdscing elit</td>
-              <td>İstanbul</td>
-              <td>1515</td>
-              <td>Ali Talha</td>
-              <td><a href="{% url 'kargodetay' %}"><button type="button" class="btn btn-sm" data-toggle="modal" data-target="#detayModal1" style="background-color: #3e9159; color: white; font-weight: bold;">Detay</button></a></td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>adghfh23153fdgd</td>
-              <td>Sed do eiusmdsfdsfdsfdsfod tempor incididunt</td>
-              <td>İstanbul</td>
-              <td>1515</td>
-              <td>Ali Talha</td>
-              <td><a href="{% url 'kargodetay' %}"><button type="button" class="btn btn-sm" data-toggle="modal" data-target="#detayModal1" style="background-color: #3e9159; color: white; font-weight: bold;">Detay</button></a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </main>
-    
-    
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script>
-      fetch("{% url 'navbar' %}")
-        .then(response => response.text())
-        .then(data => {
-          document.querySelector('#navbar-container').innerHTML = data;
-        });
-    </script>
+          </form>
+          {% endif %}
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script>
+    fetch("{% url 'navbar' %}")
+      .then(response => response.text())
+      .then(data => {
+        document.querySelector('#navbar-container').innerHTML = data;
+      });
+  </script>
+
 </html>
